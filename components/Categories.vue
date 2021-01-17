@@ -1,5 +1,5 @@
 <template>
-	<ol>
+	<ol class="categories">
 		<Category
 		v-for="category in categoryList"
 		v-bind:key="category.id"
@@ -22,3 +22,13 @@ export default {
 	}
 }
 </script>
+
+<style lang="scss">
+	.categories {
+		flex: 1 1 161px;
+		align-self: flex-start;
+		display: flex;
+		flex-direction: column;
+		gap: 1.0625rem;
+	}
+</style>

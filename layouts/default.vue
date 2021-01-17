@@ -1,13 +1,13 @@
 <template>
 	<div>
 		<Header />
-		<div class="catalog">
-			<h1>Каталог</h1>
+		<div class="header container sorting">
+			<h1 class="title title_size_xl">Каталог</h1>
 			<Sorting />
-			<Categories />
 		</div>
-		<Nuxt />
+		<div class="header container">
+			<Categories />
+			<Nuxt />
+		</div>
 	</div>
 </template>
-
-<style></style>
