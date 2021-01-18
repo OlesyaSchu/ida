@@ -14,7 +14,9 @@
 		</div>
 		<ol
 		class="select"
-		v-if="selectIsOpen">
+		v-if="selectIsOpen"
+		v-on:mouseleave="clearSelect"
+		v-on:mouseenter="disableClearSelect">
 			<Select 
 			v-for="select in sortingArray"
 			v-bind:key="select.id"
@@ -33,7 +35,20 @@ export default {
 				{ name: "популярности", id: 1, active: false },
 			],
 			selectIsOpen: false,
+			timerClearSelect: Object,
 		}
+	},
+	methods: {
+		clearSelect: function () {
+			this.timerClearSelect = setTimeout(() => {
+				if (this.selectIsOpen) {
+					this.selectIsOpen = false;
+				}
+			}, 300);
+		},
+		disableClearSelect: function () {
+			clearTimeout(this.timerClearSelect);
+		},
 	},
 }
 </script>
