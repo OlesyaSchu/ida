@@ -1,16 +1,75 @@
 <template>
 	<div class="header sorting">
 		<h3 class="title title_weight_normal title_size_m">Сортировать по:</h3>
-		<select>
-			<option>По цене</option>
-			<option>По популярности</option>
-		</select>
+		<div 
+		class="header select__button"
+		v-on:click="selectIsOpen = !selectIsOpen">
+			<p class="title title_weight_normal title_size_m">
+				{{sortingArray[0].name}}
+			</p>
+			<img
+			class="arrow" 
+			v-bind:class="{ arrow_transition: !selectIsOpen }"
+			src="~/assets/img/arrow.png" alt="">
+		</div>
+		<ol
+		class="select"
+		v-if="selectIsOpen">
+			<Select 
+			v-for="select in sortingArray"
+			v-bind:key="select.id"
+			v-bind:Select="select"
+			/>
+		</ol>
 	</div>
 </template>
+
+<script>
+export default {
+	data() {
+		return {
+			sortingArray: [
+				{ name: "цене", id: 0, active: true },
+				{ name: "популярности", id: 1, active: false },
+			],
+			selectIsOpen: false,
+		}
+	},
+}
+</script>
 
 <style lang="scss">
 	.sorting {
 		height: 96px;
 		padding-top: 4px;
+		position: relative;
+	}
+
+	.select {
+		position: absolute;
+		right: 0;
+		bottom: -40px;
+		background-color: white;
+		box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.05);
+		border-radius: 8px;
+		padding: 8px 0;
+		z-index: 100;
+
+		&__button {
+			gap: 4px;
+			margin-left: 6px;
+			color: #59606D;
+			cursor: pointer;
+		}
+	}
+	
+	.arrow {
+		transform: rotate(0deg);
+		transform-origin: 50% 50%;
+		transition: all .3s ease-in-out 0s;
+
+		&_transition {
+			transform: rotate(180deg);
+		}
 	}
 </style>
