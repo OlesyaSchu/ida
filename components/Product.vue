@@ -8,7 +8,7 @@
 				<svg class="product__rating_background" width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path fill-rule="evenodd" clip-rule="evenodd" d="M5.00002 0.162048L3.62921 2.93915C3.53825 3.12343 3.3625 3.25122 3.15916 3.28094L0.0927734 3.72914L2.3111 5.88979C2.45852 6.03338 2.52581 6.24034 2.49102 6.44317L1.96763 9.49481L4.70911 8.05309C4.89122 7.95732 5.10881 7.95732 5.29092 8.05309L8.0324 9.49481L7.50901 6.44317C7.47422 6.24034 7.54151 6.03338 7.68893 5.88979L9.90726 3.72914L6.84087 3.28094C6.63753 3.25122 6.46179 3.12343 6.37082 2.93915L5.00002 0.162048Z" fill="#F2C94C"/>
 				</svg>
-				<div class="product__rating_background_clear"></div>
+				<div class="product__rating_background_clear" v-bind:style="showingRating"></div>
 				<p class="title title_weight_normal title_size_xs">{{ Product.rating }}</p>
 			</div>
 			<img class="product__image" v-bind:src="photo" v-bind:alt="Product.name">
@@ -36,6 +36,11 @@ export default {
 			//отделяет три числа пробелом в цене, работает с любой разрядностью
 			//делает число строкой, переворачивает ее, добавляет к каждой тройке чисел пробел, переворачивает строку обратно и убирает лишний пробел, если он есть
 			price: (this.Product.price + '').split('').reverse().join('').replace(/\d{3}/g, match => match + ' ').split('').reverse().join('').trim() + ' ₽',
+			//определяет положение "заглушки", которая будет перекрывать собой часть звезды на фоне, показывая рейтинг товара
+			showingRating: {
+				top: (this.Product.rating === 5 ? -12 : -(this.Product.rating * 8 / 5 )) + 'px',
+				left: '1px',
+			},
 		};
 	},
 }
@@ -77,10 +82,9 @@ export default {
 				z-index: 10;
 
 				&_clear {
-					width: 14px;
-					height: 14px;
+					width: 12px;
+					height: 12px;
 					position: absolute;
-					top: -7px;
 					z-index: 20;
 					background-color: white;
 				}
