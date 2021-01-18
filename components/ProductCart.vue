@@ -13,13 +13,11 @@
 </template>
 
 <style lang="scss">
+@import '~/assets/styles/mixins';
 	.product__cart {
 		width: 16px;
 		height: 16px;
-		fill: #959DAD;
-	}
-
-	.product__cart:hover {
-		fill: #1F1F1F;
+		
+		@include change-color-on-hover(fill, #959DAD, #1F1F1F);
 	}
 </style>

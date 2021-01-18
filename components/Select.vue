@@ -19,17 +19,17 @@ export default {
 </script>
 
 <style lang="scss">
+@import '~/assets/styles/mixins';
 	.select__item {
 		width: 160px;
 		height: 26px;
 		line-height: 22px;
 		padding-left: 12px;
-		color: #959DAD;
+
+		@include change-color-on-hover(color, #959DAD, #1F1F1F);
 
 		&:hover {
 			background-color: #F8F8F8;
-			color: #1F1F1F;
-			cursor: pointer;
 		}
 	}
 </style>

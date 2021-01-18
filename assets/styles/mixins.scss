@@ -1,0 +1,8 @@
+@mixin change-color-on-hover($property, $color-from, $color-to) {
+	#{$property}: $color-from;
+	transition: all .2s ease-in-out 0s;
+	cursor: pointer;
+	&:hover {
+		#{$property}: $color-to;
+	}
+}
