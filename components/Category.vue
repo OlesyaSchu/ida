@@ -1,6 +1,9 @@
 <template>
 	<div>
-		<h3 class="title title_weight_normal title_size_m">{{ Category.name }}</h3>
+		<a 
+		v-on:click="isActive = !isActive"
+		v-bind:class="{active: isActive}"
+		class="title title_weight_normal title_size_m">{{ Category.name }}</a>
 	</div>
 </template>
 
@@ -11,6 +14,11 @@ export default {
 			type: Object,
 			required: true,
 		},
+	},
+	data() {
+		return {
+			isActive: false,
+		}
 	}
 }
 </script>
@@ -19,5 +27,9 @@ export default {
 @import '~/assets/styles/mixins';
 	.title {
 		@include change-color-on-hover(color, #959DAD, #1F1F1F);
+	}
+
+	.active {
+		text-decoration-line: underline;
 	}
 </style>
