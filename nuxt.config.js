@@ -32,4 +32,15 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {},
+
+  router: {
+    extendRoutes(routes) {
+      routes.push({
+        path: '/',
+        redirect: {
+          path: '/categories/1',
+        },
+      })
+    }
+  }
 }

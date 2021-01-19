@@ -1,10 +1,12 @@
 <template>
-	<div>
-		<a 
-		v-on:click="isActive = !isActive"
-		v-bind:class="{active: isActive}"
-		class="title title_weight_normal title_size_m">{{ Category.name }}</a>
-	</div>
+	<li>
+		<nuxt-link 
+		v-bind:to="('/categories/' + Category.id)"
+		active-class="active"
+		class="title title_weight_normal title_size_m">
+			{{ Category.name }}
+		</nuxt-link>
+	</li>
 </template>
 
 <script>
