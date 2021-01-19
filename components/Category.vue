@@ -15,21 +15,17 @@ export default {
 			required: true,
 		},
 	},
-	data() {
-		return {
-			isActive: false,
-		}
-	}
 }
 </script>
 
 <style lang="scss" scoped>
 @import '~/assets/styles/mixins';
 	.title {
-		@include change-color-on-hover(color, #959DAD, #1F1F1F);
+		@include change-color-on-hover(color, #959DAD, #59606D);
 	}
 
 	.active {
 		text-decoration-line: underline;
+		color: #1F1F1F;
 	}
 </style>
