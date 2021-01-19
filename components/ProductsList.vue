@@ -10,17 +10,7 @@
 
 <script>
 export default {
-	props: ['Category'],
-	data() {
-		return {
-			productList: [],
-		}
-	},
-	mounted: function () {
-		fetch('https://frontend-test.idaproject.com/api/product?category=' + this.Category)
-			.then(response => response.json())
-			.then(commits => (this.productList = commits));
-	},
+	props: ['productList'],
 }
 </script>
 

@@ -1,7 +1,7 @@
 <template>
 	<ol class="categories">
 		<Category
-		v-for="category in categoryList"
+		v-for="category in CATEGORIES"
 		v-bind:key="category.id"
 		v-bind:Category="category"
 		/>
@@ -9,16 +9,18 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+
 export default {
 	data () {
 		return {
 			categoryList: [],
 		}
 	},
-	mounted: function () {
-		fetch('https://frontend-test.idaproject.com/api/product-category')
-      .then(response => response.json())
-      .then(commits => (this.categoryList = commits));
+	computed: {
+		...mapGetters([
+			'CATEGORIES'
+		])
 	}
 }
 </script>
