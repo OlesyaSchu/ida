@@ -1,7 +1,7 @@
 <template>
 	<ol class="categories">
 		<Category
-		v-for="category in CATEGORIES"
+		v-for="category in categories"
 		v-bind:key="category.id"
 		v-bind:Category="category"
 		/>
@@ -18,9 +18,9 @@ export default {
 		}
 	},
 	computed: {
-		...mapGetters([
-			'CATEGORIES'
-		])
+		...mapGetters({
+			categories: 'categories/CATEGORIES',
+		})
 	}
 }
 </script>
