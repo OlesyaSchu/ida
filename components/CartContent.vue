@@ -34,12 +34,21 @@
 					Оформить заказ
 				</p>
 				<div class="cart__list">
+					<input
+					v-model="name" 
+					class="title title_weight_normal title_size_m cart__form" type="text"
+					placeholder="Ваше имя" maxlength="20" required>
 					<input 
-					class="title title_weight_normal title_size_m cart__form" type="text" value="Ваше имя">
+					v-on:click="addMask"
+					v-on:input="changeNumber"
+					v-model="number"
+					class="title title_weight_normal title_size_m cart__form" type="text" 
+					id="number-input"
+					placeholder="Телефон" maxlength="17" required>
 					<input 
-					class="title title_weight_normal title_size_m cart__form" type="text" value="Телефон">
-					<input 
-					class="title title_weight_normal title_size_m cart__form" type="text" value="Адрес">
+					v-model="address"
+					class="title title_weight_normal title_size_m cart__form" type="text" 
+					placeholder="Адрес" maxlength="80" required>
 				</div>
 				<input 
 				class="title title_weight_normal title_size_m cart__button" type="submit" value="Отправить">
@@ -54,18 +63,46 @@ import {mapMutations, mapGetters} from 'vuex'
 export default {
 	data () {
 		return {
-			styleProduct: "product-in-cart",
+			styleProduct: 'product-in-cart',
+			name: '', 
+			number: '', 
+			address: '',
 		}
 	},
 	methods: {
 		...mapMutations({
 			deleteProduct: 'cart/DELETE_PRODUCT',
-		})
+		}),
+		addMask: function () {
+			if (this.number === '') {
+				this.number = '+7 ___ ___-__-__';
+				this.replaceCursor();
+			} 
+		},
+		changeNumber: function () {
+			let positionOfCursor = this.number.split('').findIndex(elem => elem === '_');
+			this.number = this.number.replace(/_/, '');
+			this.replaceCursor();
+			this.checkNumber();
+		},
+		replaceCursor: function () {
+			let positionOfCursor = this.number.split('').findIndex(elem => elem === '_');
+			let elem = document.getElementById('number-input');
+			this.$nextTick(() => {
+				elem.setSelectionRange(positionOfCursor, positionOfCursor);
+			});
+		},
+		checkNumber: function () {
+			if (this.number.search(/^\+7 ([_\d]){3} ([_\d]){3}-([_\d]){2}-([_\d]){2}$/) === -1) {
+				this.number = this.number.replace(/(\+7)?[ _-]/g, '').replace(/[^0-9]/g, '').split('').reduce((str,el) => str.replace(/[_]/, el) ,"+7 ___ ___-__-__");
+				this.replaceCursor();
+			}
+		},
 	},
 	computed: {
 		...mapGetters({
 			products: 'cart/PRODUCTS',
-		})
+		}),
 	},
 }
 </script>
@@ -108,7 +145,7 @@ export default {
 			border: 0;
 			background: #F8F8F8;
 			border-radius: 8px;
-			color: #959DAD;
+			color: #1F1F1F;
 			padding-left: 14px;
 		}
 
