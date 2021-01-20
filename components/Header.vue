@@ -16,7 +16,7 @@
 			</div>
 			<Cart 
 			v-on:closeCart="changeVisibleCart"
-			v-show="this.cartIsOpen" />
+			v-show="cartIsOpen" />
 		</div>
 	</header>
 </template>
