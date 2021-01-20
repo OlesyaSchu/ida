@@ -14,13 +14,20 @@
 			<p class="title title_weight_normal cart__p">
 				Товары в корзине
 			</p>
-			<ol>
-				<ProductInCart 
-				v-on:deleteProduct="deleteProduct(index)"
-				v-for="(product, index) in products"
-				v-bind:key="index"
+			<ol class="products">
+				<Product 
+				v-for="(product, index) in products" 
+				v-bind:key="index" 
 				v-bind:Product="product"
-				/>
+				v-bind:StyleProduct="styleProduct">
+					<template v-slot:footer>
+						<div v-on:click="deleteProduct(index)">
+							<svg class="product__delete">
+								<use href="~/assets/svg/trash.svg#trash"></use>
+							</svg>
+						</div>
+					</template>
+				</Product>
 			</ol>
 			<p class="title title_weight_normal cart__p">
 				Оформить заказ
@@ -33,6 +40,11 @@
 import {mapMutations, mapGetters} from 'vuex'
 
 export default {
+	data () {
+		return {
+			styleProduct: "product-in-cart",
+		}
+	},
 	methods: {
 		...mapMutations({
 			deleteProduct: 'cart/DELETE_PRODUCT',

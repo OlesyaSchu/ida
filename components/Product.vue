@@ -1,35 +1,40 @@
 <template>
-	<li class="product">
-		<div class="product__images">
-			<div class="product__rating">
-				<svg class="product__rating_z-index_30 product__star">
-					<use href="~/assets/svg/star.svg#star-empty"></use>
-				</svg>
-				<svg class="product__rating_background">
-					<use href="~/assets/svg/star.svg#star-fill"></use>
-				</svg>
-				<div class="product__rating_background_clear" v-bind:style="showingRating"></div>
-				<p class="title title_weight_normal title_size_xs">{{ Product.rating }}</p>
-			</div>
-			<img class="product__image" v-bind:src="photo" v-bind:alt="Product.name">
-			<ProductCart 
-			v-on:addProduct="addProduct(Product)"/>
+	<li v-bind:class="getStyleName('')">
+		<slot name="header">
+		</slot>
+		<div v-bind:class="getStyleName('__image')">
+			<img v-bind:src="photo" v-bind:alt="Product.name">
 		</div>
-		<div class="product__information">
+		<div v-bind:class="getStyleName('__information')">
 			<p class="title title_weight_normal title_size_s title_text-transform_capitalize">{{ name }}</p>
 			<p class="title title_size_s">{{ price }}</p>
 		</div>
+		<div v-bind:class="getStyleName('__rating')">
+			<svg v-bind:class="getStyleName('__star_empty')">
+				<use href="~/assets/svg/star.svg#star-empty"></use>
+			</svg>
+			<svg v-bind:class="getStyleName('__star_fill')">
+				<use href="~/assets/svg/star.svg#star-fill"></use>
+			</svg>
+			<div v-bind:class="getStyleName('__star_clear')" v-bind:style="showingRating"></div>
+			<p class="title title_weight_normal title_size_xs">{{ Product.rating }}</p>
+		</div>
+		<slot name="footer">
+		</slot>
 	</li>
 </template>
 
 <script>
-import {mapMutations} from 'vuex'
+
 
 export default {
 	props: {
 		Product: {
 			type: Object,
 			required: true,
+		},
+		StyleProduct: {
+			type: String,
 		},
 	},
 	data () {
@@ -47,68 +52,57 @@ export default {
 		};
 	},
 	methods: {
-		...mapMutations({
-			addProduct: 'cart/ADD_PRODUCT'
-		}),
-	}
+		getStyleName: function (name) {
+			return this.StyleProduct + name;
+		},
+	},
 }
 </script>
 
 <style lang="scss">
-	.product {
+	.product-in-products-list, .product-in-cart {
 		box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.05);
 		border-radius: 8px;
 		padding: 16px;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
+		position: relative;
 
-		&__images {
+		&__image {
 			display: flex;
 			justify-content: center;
-			position: relative;
+			height: 198px;
 		}
 
 		&__rating {
-			width: 34px;
-			height: 100%;
 			display: flex;
 			gap: 4px;
 			color: #F2C94C;
 			position: absolute;
-			top: 5px;
-			left: 3px;
-
-			&_z-index_30 {
-				z-index: 30;
-			}
-
-			&_background {
-				position: absolute;
-				z-index: 10;
-
-				&_clear {
-					width: 12px;
-					height: 12px;
-					position: absolute;
-					z-index: 20;
-					background-color: white;
-				}
-			}
+			top: 21px;
+			left: 18px;
 		}
 
 		&__star {
-			width: 14px;
-			height: 14px;
-		}
+			&_empty {
+				width: 14px;
+				height: 14px;
+				z-index: 30;
+			}
 
-		&__image {
-			height: 196px;
-		}
+			&_fill {
+				position: absolute;
+				z-index: 10;
+			}
 
-		&__cart {
-			position: absolute;
-			right: 0;
+			&_clear {
+				width: 12px;
+				height: 12px;
+				position: absolute;
+				background-color: white;
+				z-index: 20;
+			}
 		}
 
 		&__information {
