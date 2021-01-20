@@ -40,9 +40,9 @@ export default {
 	}
 
 	.cart {
-		height: 100vh;
+		min-height: 100vh;
 		width: 460px;
-		position: fixed;
+		position: absolute;
 		top: 0;
 		right: 240px;
 		background: #FFFFFF;

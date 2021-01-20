@@ -3,7 +3,11 @@
 		<div 
 		v-on:click="changeVisibleCart"
 		class="cart-icon_position">
-			<p class="title cart-icon__quantity">3</p>
+			<p 
+			v-if="products.length"
+			class="title cart-icon__quantity">
+				{{ products.length }}
+			</p>
 			<svg class="cart-icon" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
 				<g id="cart">
 				<g id="Vector">
@@ -21,6 +25,8 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+
 export default {
 	data () {
 		return {
@@ -32,6 +38,11 @@ export default {
 			this.cartIsOpen = !this.cartIsOpen;
 		}
 	},
+	computed: {
+		...mapGetters({
+			products: 'cart/PRODUCTS'
+		})
+	}
 }
 </script>
 

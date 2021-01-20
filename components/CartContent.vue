@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div v-if="cartIsEmpty">
+		<div v-if="!products.length">
 			<p class="title title_weight_normal title_size_l cart__title">
 				Пока что вы ничего не добавили в корзину.
 			</p>
@@ -15,7 +15,12 @@
 				Товары в корзине
 			</p>
 			<ol>
-				<ProductInCart />
+				<ProductInCart 
+				v-on:deleteProduct="deleteProduct(index)"
+				v-for="(product, index) in products"
+				v-bind:key="index"
+				v-bind:Product="product"
+				/>
 			</ol>
 			<p class="title title_weight_normal cart__p">
 				Оформить заказ
@@ -25,11 +30,18 @@
 </template>
 
 <script>
+import {mapMutations, mapGetters} from 'vuex'
+
 export default {
-	data () {
-		return {
-			cartIsEmpty: true,
-		}
+	methods: {
+		...mapMutations({
+			deleteProduct: 'cart/DELETE_PRODUCT',
+		})
+	},
+	computed: {
+		...mapGetters({
+			products: 'cart/PRODUCTS',
+		})
 	},
 }
 </script>

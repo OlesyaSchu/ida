@@ -12,7 +12,8 @@
 				<p class="title title_weight_normal title_size_xs">{{ Product.rating }}</p>
 			</div>
 			<img class="product__image" v-bind:src="photo" v-bind:alt="Product.name">
-			<ProductCart />
+			<ProductCart 
+			v-on:addProduct="addProduct(Product)"/>
 		</div>
 		<div class="product__information">
 			<p class="title title_weight_normal title_size_s title_text-transform_capitalize">{{ name }}</p>
@@ -22,6 +23,8 @@
 </template>
 
 <script>
+import {mapMutations} from 'vuex'
+
 export default {
 	props: {
 		Product: {
@@ -43,6 +46,11 @@ export default {
 			},
 		};
 	},
+	methods: {
+		...mapMutations({
+			addProduct: 'cart/ADD_PRODUCT'
+		}),
+	}
 }
 </script>
 

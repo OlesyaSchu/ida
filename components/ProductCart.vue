@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div v-on:click="$emit('addProduct')">
 		<svg class="product__cart" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
 			<g>
 			<g>
