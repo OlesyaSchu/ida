@@ -56,6 +56,7 @@ export default {
 			justify-content: space-between;
 			align-items: center;
 			margin-top: 50px;
+			margin-bottom: 24px;
 		}
 
 		&__exit {
