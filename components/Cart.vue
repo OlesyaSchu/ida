@@ -44,7 +44,7 @@ export default {
 		width: 460px;
 		position: absolute;
 		top: 0;
-		right: 0;
+		right: -88px;
 		background: #FFFFFF;
 		box-shadow: -4px 0px 16px rgba(0, 0, 0, 0.05);
 		border-radius: 8px 0px 0px 8px;

@@ -11,7 +11,7 @@
 			</button>
 		</div>
 		<div v-else>
-			<p class="title title_weight_normal cart__p">
+			<p class="title title_weight_normal cart__text">
 				Товары в корзине
 			</p>
 			<ol class="products">
@@ -29,7 +29,7 @@
 					</template>
 				</Product>
 			</ol>
-			<p class="title title_weight_normal cart__p">
+			<p class="title title_weight_normal cart__text">
 				Оформить заказ
 			</p>
 		</div>
@@ -63,12 +63,13 @@ export default {
 	.cart {
 		&__title {
 			width: 90%;
-			margin: 24px 0;
+			margin: 25px 0 24px;
 		}
 
 		&__button {
 			width: 100%;
 			height: 50px;
+			padding-bottom: 4px;
 			background: #1F1F1F;
 			border-radius: 8px;
 			color: white;
@@ -76,7 +77,7 @@ export default {
 			@include change-color-on-hover(background,#1F1F1F, #59606D);
 		}
 
-		&__p {
+		&__text {
 			font-size: 18px;
 			line-height: 23px;
 		}
