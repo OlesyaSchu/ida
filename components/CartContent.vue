@@ -19,7 +19,7 @@
 				v-for="(product, index) in products" 
 				v-bind:key="index" 
 				v-bind:Product="product"
-				v-bind:StyleProduct="styleProduct">
+				v-bind:classProduct="classProduct">
 					<template v-slot:footer>
 						<svg 
 						v-on:click="deleteProduct(index)"
@@ -63,7 +63,7 @@ import {mapMutations, mapGetters} from 'vuex'
 export default {
 	data () {
 		return {
-			styleProduct: 'product-in-cart',
+			classProduct: 'product-in-cart',
 			name: '', 
 			number: '', 
 			address: '',

@@ -33,7 +33,7 @@ export default {
 			type: Object,
 			required: true,
 		},
-		StyleProduct: {
+		classProduct: {
 			type: String,
 		},
 	},
@@ -53,7 +53,7 @@ export default {
 	},
 	methods: {
 		getStyleName: function (name) {
-			return this.StyleProduct + name;
+			return this.classProduct + name;
 		},
 	},
 }

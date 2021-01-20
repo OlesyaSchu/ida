@@ -4,7 +4,7 @@
 		v-for="product in productList" 
 		v-bind:key="product.id" 
 		v-bind:Product="product"
-		v-bind:StyleProduct="styleProduct">
+		v-bind:classProduct="classProduct">
 			<template v-slot:header>
 				<svg 
 				v-on:click="addProduct(product)"
@@ -23,7 +23,7 @@ export default {
 	props: ['productList'],
 	data () {
 		return {
-			styleProduct: "product-in-products-list",
+			classProduct: "product-in-products-list",
 		}
 	},
 	methods: {
