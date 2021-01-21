@@ -1,21 +1,20 @@
 <template>
 	<ProductsList 
-	v-bind:productList="productList"
+	v-bind:productsList="productsList"
 	/>
 </template>
 
 <script>
-
 export default {
-	async asyncData({ params }) {
-      const category = params.index;
-      return { category }
-	},
-	async asyncData({ params }) {
-		const productList = await fetch('https://frontend-test.idaproject.com/api/product?category=' + params.index)
+	async asyncData({ params, store }) {
+		const productsList = await fetch('https://frontend-test.idaproject.com/api/product?category=' + params.index)
 			.then(response => response.json())
-			.then(commits => commits);
-		return { productList }
+			.then(data => {
+				store.commit('productsList/SET_PRODUCTS_LIST', data);
+				store.commit('productsList/SORT_PRODUCTS_LIST');
+				return data;
+				});
+		return { productsList }
 	},
 }
 </script>

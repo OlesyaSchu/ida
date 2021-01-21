@@ -1,5 +1,9 @@
 <template>
-	<li class="title title_weight_normal title_size_s select__item">{{ name }}</li>
+	<li 
+	v-on:click="$emit('ChangeSelect', Select.name)"
+	class="title title_weight_normal title_size_s select__item">
+		{{ name }}
+	</li>
 </template>
 
 <script>

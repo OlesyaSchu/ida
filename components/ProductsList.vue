@@ -1,7 +1,7 @@
 <template>
 	<ol class="products">
 		<Product 
-		v-for="product in productList" 
+		v-for="product in productsList" 
 		v-bind:key="product.id" 
 		v-bind:Product="product"
 		v-bind:classProduct="classProduct">
@@ -17,20 +17,24 @@
 </template>
 
 <script>
-import {mapMutations} from 'vuex'
+import {mapMutations, mapGetters} from 'vuex'
 
 export default {
-	props: ['productList'],
 	data () {
 		return {
 			classProduct: "product-in-products-list",
 		}
 	},
 	methods: {
-	...mapMutations({
-		addProduct: 'cart/ADD_PRODUCT'
-		}),
+		...mapMutations({
+			addProduct: 'cart/ADD_PRODUCT'
+			}),
 	},
+	computed: {
+		...mapGetters({
+			productsList: 'productsList/PRODUCTS_LIST',
+		})
+	}
 }
 </script>
 
