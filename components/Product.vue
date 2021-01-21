@@ -76,6 +76,7 @@ export default {
 		&__image {
 			display: flex;
 			justify-content: center;
+			align-items: center;
 			height: 198px;
 		}
 
