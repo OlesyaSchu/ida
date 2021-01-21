@@ -17,7 +17,7 @@
 			<ol class="products-in-cart">
 				<Product 
 				v-for="(product, index) in products" 
-				v-bind:key="index" 
+				v-bind:key="product.id + product.name" 
 				v-bind:Product="product"
 				v-bind:classProduct="classProduct">
 					<template v-slot:footer>
