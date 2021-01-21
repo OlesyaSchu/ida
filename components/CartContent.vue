@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div v-if="!products.length">
+		<div v-if="!products.length && !formIsSent">
 			<p class="title title_weight_normal title_size_l cart__title">
 				Пока что вы ничего не добавили в корзину.
 			</p>
@@ -10,7 +10,7 @@
 				Перейти к выбору
 			</button>
 		</div>
-		<div v-else>
+		<div v-if="products.length">
 			<p class="title title_weight_normal cart__text">
 				Товары в корзине
 			</p>
@@ -29,7 +29,7 @@
 					</template>
 				</Product>
 			</ol>
-			<form class="cart__forms">
+			<div class="cart__forms">
 				<p class="title title_weight_normal cart__text">
 					Оформить заказ
 				</p>
@@ -50,9 +50,19 @@
 					class="title title_weight_normal title_size_m cart__form" type="text" 
 					placeholder="Адрес" maxlength="80" required>
 				</div>
-				<input 
-				class="title title_weight_normal title_size_m cart__button" type="submit" value="Отправить">
-			</form>
+				<button 
+				v-on:click="sendForm"
+				class="title title_weight_normal title_size_m cart__button">
+					Отправить
+				</button>
+			</div>
+		</div>
+		<div 
+		v-if="formIsSent && !products.length"
+		class="application">
+			<img class="application__image" src="~/assets/img/ok-hand.png" alt="ok-hand">
+			<h1 class="title application__title">Заявка успешно отправлена</h1>
+			<p class="title title_weight_normal title_size_m application__text">Вскоре наш менеджер свяжется с Вами</p>
 		</div>
 	</div>
 </template>
@@ -67,11 +77,13 @@ export default {
 			name: '', 
 			number: '', 
 			address: '',
+			formIsSent: false,
 		}
 	},
 	methods: {
 		...mapMutations({
 			deleteProduct: 'cart/DELETE_PRODUCT',
+			deleteAllProducts: 'cart/DELETE_ALL_PRODUCTS',
 		}),
 		addMask: function () {
 			if (this.number === '') {
@@ -98,11 +110,22 @@ export default {
 				this.replaceCursor();
 			}
 		},
+		sendForm: function () {
+			if (this.inputsAreCompleted) {
+				this.deleteAllProducts();
+				this.formIsSent = true;
+			} else {
+				alert("Заполните все формы до конца!");
+			}
+		},
 	},
 	computed: {
 		...mapGetters({
 			products: 'cart/PRODUCTS',
 		}),
+		inputsAreCompleted: function () {
+			return this.name.length && (this.number.replace(/(\+7)?[ _-]/g, '').length === 10) && this.address.length;
+		}
 	},
 }
 </script>
@@ -167,5 +190,30 @@ export default {
 		z-index: 30;
 
 		@include change-color-on-hover(fill, #959DAD, #1F1F1F);
+	}
+
+	.application {
+		width: 100%;
+		height: 87vh;
+		position: absolite;
+		top: 0;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+
+		&__image {
+			margin: 24px;
+		}
+
+		&__title {
+			font-size: 1.5rem;
+		}
+
+		&__text {
+			padding-top: 2px;
+			color: #59606D;
+		}
 	}
 </style>

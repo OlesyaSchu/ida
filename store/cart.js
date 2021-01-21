@@ -9,6 +9,9 @@ export const mutations = {
 	DELETE_PRODUCT (state, index) {
 		state.products.splice(index, 1);
 	},
+	DELETE_ALL_PRODUCTS (state) {
+		state.products = [];
+	},
 }
 
 export const getters = {
