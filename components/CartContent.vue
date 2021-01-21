@@ -14,7 +14,7 @@
 			<p class="title title_weight_normal cart__text">
 				Товары в корзине
 			</p>
-			<ol class="products-in-cart">
+			<transition-group class="products-in-cart" name="slide-up" tag="ol" appear>
 				<Product 
 				v-for="(product, index) in products" 
 				v-bind:key="product.id + product.name" 
@@ -28,7 +28,7 @@
 						</svg>
 					</template>
 				</Product>
-			</ol>
+			</transition-group>
 			<div class="cart__forms">
 				<p class="title title_weight_normal cart__text">
 					Оформить заказ

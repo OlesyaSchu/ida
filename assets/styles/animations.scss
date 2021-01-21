@@ -1,0 +1,21 @@
+.fade {
+	&-enter-active, &-leave-active {
+		transition: all .5s ease;
+		z-index: 100;
+	}
+
+	&-enter, &-leave-to {
+		opacity: 0;
+	}
+}
+
+.slide-up {
+	&-enter-active, &-leave-active {
+		transition: all .3s ease;
+	}
+
+	&-enter, &-leave-to {
+		transform: translateX(20px);
+		opacity: 0;
+	}
+}

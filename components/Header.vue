@@ -14,9 +14,11 @@
 					<use href="~/assets/svg/cart.svg#cart"></use>
 				</svg>
 			</div>
-			<Cart 
-			v-on:closeCart="changeVisibleCart"
-			v-show="cartIsOpen" />
+			<transition name="fade">
+				<Cart 
+				v-on:closeCart="changeVisibleCart"
+				v-show="cartIsOpen" />
+			</transition>
 		</div>
 	</header>
 </template>
