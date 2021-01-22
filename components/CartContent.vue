@@ -80,8 +80,19 @@ export default {
 			formIsSent: false,
 		}
 	},
+	mounted () {
+		if (localStorage.getItem('productsInCart')) {
+			try {
+				const data = JSON.parse(localStorage.getItem('productsInCart'));
+				this.setProducts(data);
+			} catch(error) {
+				localStorage.removeItem('productsInCart');
+			}
+		}
+	},
 	methods: {
 		...mapMutations({
+			setProducts: 'cart/SET_PRODUCTS',
 			deleteProduct: 'cart/DELETE_PRODUCT',
 			deleteAllProducts: 'cart/DELETE_ALL_PRODUCTS',
 		}),
@@ -92,7 +103,6 @@ export default {
 			} 
 		},
 		changeNumber: function () {
-			let positionOfCursor = this.number.split('').findIndex(elem => elem === '_');
 			this.number = this.number.replace(/_/, '');
 			this.replaceCursor();
 			this.checkNumber();
